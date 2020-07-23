@@ -1,0 +1,47 @@
+{
+	"itemGroup.honkaiimpact": "崩坏",
+	
+	"effect.honkaiimpact.counter": "攻击计数",
+	"effect.honkaiimpact.lightningconducting": "雷引",
+	"effect.honkaiimpact.nanoboost": "纳米强化",
+	
+	"honkaiimpactmisc.shiftinfo": "按住shift查看更多信息",
+	
+	"item.honkaiimpact.benarest": "贝纳勒斯·觉醒丨上位",
+	"item.honkaiimpact.benaresm": "贝纳勒斯·觉醒丨中位",
+	"item.honkaiimpact.benaresb": "贝纳勒斯·觉醒丨下位",
+	"honkaiimpactmisc.benarest": "孤月",
+	"honkaiimpactmisc.benarestdesc0": "全伤害提高20%",
+	"honkaiimpactmisc.benaresm": "苍龙",
+	"honkaiimpactmisc.benaresmdesc0": "雷电元素伤害提高25%",
+	"honkaiimpactmisc.benaresb": "女王",
+	"honkaiimpactmisc.benaresbdesc0": "雷电元素伤害提高25%",
+	"honkaiimpactmisc.benares2set": "崩坏造物 2件",
+	"honkaiimpactmisc.benares2setdesc0": "律者形态下攻击命中敌人时，使敌人进入雷引状态（唯一生效），持续7秒，重复触发刷新持续时间",
+	"honkaiimpactmisc.benares2setdesc1": "雷引状态敌人受到玩家攻击时额外受到10%攻击力雷电元素伤害，雷引状态的敌人受到的雷电元素伤害提高15%",
+	"honkaiimpactmisc.benares3set": "审判之龙 3件",
+	"honkaiimpactmisc.benares3setdesc0": "角色受全伤害降低25%",
+	
+	"item.honkaiimpact.weltyangt": "瓦尔特·杨丨上位",
+	"item.honkaiimpact.weltyangm": "瓦尔特·杨丨中位",
+	"item.honkaiimpact.weltyangb": "瓦尔特·杨丨下位",
+	"honkaiimpactmisc.weltyangt": "盟主",
+	"honkaiimpactmisc.weltyangtdesc0": "全伤害提高20%",
+	"honkaiimpactmisc.weltyangm": "信念",
+	"honkaiimpactmisc.weltyangmdesc0": "冰冻元素伤害提高20%",
+	"honkaiimpactmisc.weltyangb": "传承",
+	"honkaiimpactmisc.weltyangbdesc0": "全伤害提高15%",
+	"honkaiimpactmisc.weltyang2set": "不屈 2件",
+	"honkaiimpactmisc.weltyang2setdesc0": "每15次攻击可获得一次强化状态：下一次蓄力攻击及之后5秒内，全伤害提高60%",
+	"honkaiimpactmisc.weltyang2setdesc1": "强化状态结束之后清空计数。",
+	"honkaiimpactmisc.weltyang3set": "逆熵 3件",
+	"honkaiimpactmisc.weltyang3setdesc0": "骑乘模式下，蓄力攻击会吸引周围敌人",
+	
+	"item.honkaiimpact.gemofconquest": "征服宝石",
+	"item.honkaiimpact.motor": "重装摩托",
+	
+	"curios.identifier.stigmatat": "究极的攻击型圣痕",
+	"curios.identifier.stigmatam": "究极的防御型圣痕",
+	"curios.identifier.stigmatab": "究极的综合型圣痕"
+
+}

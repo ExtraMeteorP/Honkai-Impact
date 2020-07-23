@@ -1,0 +1,6 @@
+{
+	"cyclone": { "sounds":["honkaiimpact:cyclone"], "subtitle": "honkaiimpact.subtitle.cyclone" },
+	"shoot": { "sounds":["honkaiimpact:shoot"], "subtitle": "honkaiimpact.subtitle.shoot" },
+	"slash": { "sounds":["honkaiimpact:slash"], "subtitle": "honkaiimpact.subtitle.slash" },
+	"rideon": { "sounds":["honkaiimpact:rideon"], "subtitle": "honkaiimpact.subtitle.rideon" }
+}

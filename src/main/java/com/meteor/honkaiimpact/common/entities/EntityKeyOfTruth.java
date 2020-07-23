@@ -1,5 +1,7 @@
 package com.meteor.honkaiimpact.common.entities;
 
+import com.meteor.honkaiimpact.common.core.ModSounds;
+import com.meteor.honkaiimpact.common.handler.HerrscherHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -11,6 +13,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -73,11 +76,10 @@ public class EntityKeyOfTruth extends Entity {
             return;
         }
 
-        if (owner != null && getTarget() == -1 && owner.getLastAttackedEntity() != null && owner.getLastAttackedEntity().canEntityBeSeen(owner))
-            setTarget(owner.getLastAttackedEntity().getEntityId());
-
-        if (getTarget() == -1)
-            for (LivingEntity living : getEntitiesAround()) {
+        if (getTarget() == -1){
+            if(owner.getLastAttackedEntity() != null && owner.getLastAttackedEntity().canEntityBeSeen(owner)) {
+                setTarget(owner.getLastAttackedEntity().getEntityId());
+            } else for (LivingEntity living : getEntitiesAround()) {
                 if (living == owner)
                     continue;
                 if (living instanceof IMob) {
@@ -85,35 +87,35 @@ public class EntityKeyOfTruth extends Entity {
                     break;
                 }
             }
+        }
 
         Entity target = world.getEntityByID(getTarget());
 
         if (target == null)
             remove();
-
-        if (target != null && target.isLiving()) {
+        if(target != null) {
             this.faceEntity(target, 360F, 360F);
-        } else {
-            this.remove();
+
+            setRotation(MathHelper.wrapDegrees(-this.rotationYaw + 180));
+            setPitch(-this.rotationPitch + 360);
+
+            if (ticksExisted % 10 == 0 && !this.shoot) {
+                world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.shoot, SoundCategory.PLAYERS, 0.25F, 1F, true);
+                this.shoot = true;
+                this.countdown = 4;
+            }
+
+            if (this.countdown > 0) {
+                this.countdown--;
+                if (target != null) {
+                    target.attackEntityFrom(DamageSource.causePlayerDamage(owner), 0.01F);
+                    HerrscherHandler.iceAttack(target, owner, 4F);
+                }
+            }
+
+            if (this.countdown == 0)
+                this.shoot = false;
         }
-
-        setRotation(MathHelper.wrapDegrees(-this.rotationYaw + 180));
-        setPitch(-this.rotationPitch + 360);
-
-        if (ticksExisted % 10 == 0) {
-            this.shoot = true;
-            this.countdown = 4;
-            //world.playSound(posX, posY, posZ, ModSounds.shoot, SoundCategory.PLAYERS, 0.45F, 1F, true);
-        }
-
-        if (this.countdown > 0) {
-            this.countdown--;
-            if (target != null && target.isLiving())
-                target.attackEntityFrom(DamageSource.causePlayerDamage(owner).setDamageBypassesArmor().setDamageIsAbsolute(), 5F);
-        }
-
-        if (this.countdown == 0)
-            this.shoot = false;
 
         if (ticksExisted >= 45)
             this.remove();

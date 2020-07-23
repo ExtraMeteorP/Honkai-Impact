@@ -7,147 +7,115 @@ import net.minecraft.inventory.EquipmentSlotType;
 
 public class ModelHerrscher extends ModelArmor {
 
-    private final ModelRenderer bone;
+    private final ModelRenderer rightArm;
     private final ModelRenderer bone2;
+    private final ModelRenderer katanaSheath;
+    private final ModelRenderer bone4;
     private final ModelRenderer bone3;
-    private final ModelRenderer rightarm;
-    private final ModelRenderer right;
-    private final ModelRenderer s1;
-    private final ModelRenderer s2;
-    private final ModelRenderer s3;
-    private final ModelRenderer hand;
-    private final ModelRenderer leftarm;
-    private final ModelRenderer right2;
-    private final ModelRenderer s4;
-    private final ModelRenderer s5;
-    private final ModelRenderer s6;
-    private final ModelRenderer hand2;
-    private final ModelRenderer sword;
+    private final ModelRenderer leftArm;
+    private final ModelRenderer bone5;
+    private final ModelRenderer bone6;
+    private final ModelRenderer katana;
+    private final ModelRenderer bone7;
+    private final ModelRenderer back;
 
     public ModelHerrscher() {
         super(EquipmentSlotType.CHEST);
-        textureWidth = 128;
-        textureHeight = 128;
+        textureWidth = 64;
+        textureHeight = 64;
 
-        bone = new ModelRenderer(this);
-        bone.setRotationPoint(0.0F, -5.0F, 7.0F);
-        setRotationAngle(bone, -0.5236F, -1.5708F, 0.0F);
-        bone.setTextureOffset(0, 0).addBox(-9.0F, -5.0F, 4.0F, 3.0F, 3.0F, 7.0F, 0.0F, false);
-        bone.setTextureOffset(34, 0).addBox(-18.0F, -3.7679F, 9.3301F, 12.0F, 1.0F, 1.0F, 0.0F, false);
+        rightArm = new ModelRenderer(this);
+        rightArm.setRotationPoint(5.75F, 1.0F, 2.75F);
+        setRotationAngle(rightArm, -0.4363F, 0.0F, -0.3491F);
+        rightArm.setTextureOffset(0, 13).addBox(0.6859F, 1.3201F, -2.6295F, 3.0F, 9.0F, 5.0F, 0.0F, false);
+        rightArm.setTextureOffset(11, 0).addBox(0.6859F, 2.3201F, -3.6295F, 2.0F, 7.0F, 1.0F, 0.0F, false);
+        rightArm.setTextureOffset(0, 0).addBox(0.6859F, 2.3201F, 2.3705F, 2.0F, 7.0F, 1.0F, 0.0F, false);
+        rightArm.setTextureOffset(0, 0).addBox(1.1859F, 3.3201F, -4.6295F, 1.0F, 4.0F, 9.0F, 0.0F, false);
+        rightArm.setTextureOffset(12, 5).addBox(2.1859F, 3.3201F, -4.1295F, 1.0F, 2.0F, 8.0F, 0.0F, false);
+        rightArm.setTextureOffset(17, 0).addBox(3.1859F, 1.3201F, -1.6295F, 1.0F, 2.0F, 3.0F, 0.0F, false);
+        rightArm.setTextureOffset(22, 0).addBox(3.1859F, 3.3201F, -0.6295F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+        rightArm.setTextureOffset(16, 16).addBox(0.1859F, 10.3201F, -1.1295F, 3.0F, 3.0F, 3.0F, 0.0F, false);
+        rightArm.setTextureOffset(11, 15).addBox(0.1859F, 10.3201F, -2.1295F, 3.0F, 2.0F, 1.0F, 0.0F, false);
+        rightArm.setTextureOffset(16, 7).addBox(1.1859F, 4.3201F, 4.3705F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+        rightArm.setTextureOffset(5, 7).addBox(1.1859F, 4.3201F, -5.6295F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 
         bone2 = new ModelRenderer(this);
-        bone2.setRotationPoint(0.0F, -5.0F, -7.0F);
-        setRotationAngle(bone2, 0.5236F, -1.5708F, 0.0F);
-        bone2.setTextureOffset(0, 12).addBox(5.0F, -5.0F, -11.0F, 3.0F, 3.0F, 7.0F, 0.0F, false);
+        bone2.setRotationPoint(3.6859F, 1.3201F, -0.1295F);
+        rightArm.addChild(bone2);
+        setRotationAngle(bone2, 0.0F, 0.0F, 0.7854F);
+        bone2.setTextureOffset(0, 13).addBox(-0.2835F, -2.991F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+
+        katanaSheath = new ModelRenderer(this);
+        katanaSheath.setRotationPoint(1.2474F, 13.2096F, 0.6816F);
+        rightArm.addChild(katanaSheath);
+        setRotationAngle(katanaSheath, -0.0873F, 0.0F, -0.0873F);
+        katanaSheath.setTextureOffset(31, 49).addBox(-0.1555F, -2.0137F, -1.1343F, 1.0F, 2.0F, 13.0F, 0.0F, false);
+
+        bone4 = new ModelRenderer(this);
+        bone4.setRotationPoint(0.0F, 0.0F, 13.0F);
+        katanaSheath.addChild(bone4);
+        setRotationAngle(bone4, 0.1745F, 0.0F, 0.0F);
+        bone4.setTextureOffset(46, 52).addBox(-0.1555F, -2.2105F, -1.1147F, 1.0F, 2.0F, 8.0F, 0.0F, false);
 
         bone3 = new ModelRenderer(this);
-        bone3.setRotationPoint(0.0F, -5.0F, 7.0F);
-        bone3.setTextureOffset(0, 24).addBox(-11.0F, -10.0F, 8.0F, 24.0F, 24.0F, 0.0F, 0.0F, false);
+        bone3.setRotationPoint(2.1859F, 0.5701F, 0.3705F);
+        rightArm.addChild(bone3);
+        setRotationAngle(bone3, 0.0F, 0.0F, -0.2618F);
+        bone3.setTextureOffset(16, 22).addBox(-2.0F, -2.0F, -2.0F, 2.0F, 3.0F, 3.0F, 0.0F, false);
+        bone3.setTextureOffset(22, 2).addBox(0.0F, -1.0F, -2.0F, 1.0F, 2.0F, 3.0F, 0.0F, false);
 
-        rightarm = new ModelRenderer(this);
-        rightarm.setRotationPoint(10.0F, 2.0F, -2.0F);
-        setRotationAngle(rightarm, 0.0F, -0.0873F, -0.8727F);
+        leftArm = new ModelRenderer(this);
+        leftArm.setRotationPoint(-8.0F, 3.0F, 2.5F);
+        setRotationAngle(leftArm, -0.4363F, 0.0F, 0.3491F);
+        leftArm.setTextureOffset(30, 0).addBox(-1.0F, -1.0F, -3.0F, 3.0F, 10.0F, 4.0F, 0.0F, false);
+        leftArm.setTextureOffset(44, 0).addBox(-2.0F, 1.0F, -2.0F, 1.0F, 4.0F, 2.0F, 0.0F, false);
+        leftArm.setTextureOffset(30, 20).addBox(-1.0F, -3.0F, -3.0F, 3.0F, 2.0F, 1.0F, 0.0F, false);
+        leftArm.setTextureOffset(30, 23).addBox(-1.0F, -3.0F, 0.0F, 3.0F, 2.0F, 1.0F, 0.0F, false);
+        leftArm.setTextureOffset(44, 6).addBox(-1.0F, -4.0F, -2.0F, 3.0F, 1.0F, 2.0F, 0.0F, false);
+        leftArm.setTextureOffset(54, 0).addBox(-0.6381F, -0.7174F, -4.039F, 2.0F, 5.0F, 1.0F, 0.0F, false);
+        leftArm.setTextureOffset(54, 6).addBox(-0.4238F, -0.7607F, 0.9059F, 2.0F, 5.0F, 1.0F, 0.0F, false);
 
+        bone5 = new ModelRenderer(this);
+        bone5.setRotationPoint(0.0F, 0.0F, -1.0F);
+        leftArm.addChild(bone5);
+        setRotationAngle(bone5, 0.0F, 0.0F, 0.5236F);
+        bone5.setTextureOffset(30, 14).addBox(-3.1094F, -0.3639F, -1.0F, 3.0F, 2.0F, 2.0F, 0.0F, false);
 
-        right = new ModelRenderer(this);
-        right.setRotationPoint(0.0F, 0.0F, 0.0F);
-        rightarm.addChild(right);
-        right.setTextureOffset(29, 8).addBox(-16.0F, -17.0F, 0.0F, 8.0F, 2.0F, 6.0F, 0.0F, false);
-        right.setTextureOffset(29, 16).addBox(-15.0F, -17.3F, 1.0F, 6.0F, 2.0F, 4.0F, 0.0F, false);
-        right.setTextureOffset(0, 12).addBox(-15.0F, -16.3F, 1.0F, 6.0F, 2.0F, 4.0F, 0.0F, false);
-        right.setTextureOffset(51, 3).addBox(-9.0F, -17.5F, 4.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        right.setTextureOffset(48, 24).addBox(-9.0F, -17.5F, 1.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        right.setTextureOffset(29, 0).addBox(-6.0F, -17.5F, 2.0F, 1.0F, 1.0F, 2.0F, 0.0F, false);
+        bone6 = new ModelRenderer(this);
+        bone6.setRotationPoint(-3.9575F, 1.2207F, 0.0F);
+        bone5.addChild(bone6);
+        setRotationAngle(bone6, 0.0F, 0.0F, 0.3491F);
+        bone6.setTextureOffset(30, 18).addBox(-2.7531F, -1.3651F, -0.5F, 4.0F, 1.0F, 1.0F, 0.0F, false);
 
-        s1 = new ModelRenderer(this);
-        s1.setRotationPoint(0.0F, -17.0F, 1.0F);
-        rightarm.addChild(s1);
-        setRotationAngle(s1, -0.5236F, 0.0F, 0.0F);
-        s1.setTextureOffset(51, 0).addBox(-14.0F, 0.875F, -0.7835F, 5.0F, 2.0F, 1.0F, 0.0F, false);
+        katana = new ModelRenderer(this);
+        katana.setRotationPoint(1.0F, 8.0F, -4.0F);
+        leftArm.addChild(katana);
+        setRotationAngle(katana, -0.0873F, 3.0543F, 0.0F);
+        katana.setTextureOffset(31, 13).addBox(-0.1555F, -2.0137F, -1.1343F, 1.0F, 2.0F, 13.0F, 0.0F, false);
+        katana.setTextureOffset(46, 14).addBox(-0.1596F, -1.9492F, -7.5283F, 1.0F, 2.0F, 3.0F, 0.0F, false);
+        katana.setTextureOffset(46, 9).addBox(-1.6025F, -3.4558F, -0.4588F, 4.0F, 5.0F, 0.0F, 0.0F, false);
 
-        s2 = new ModelRenderer(this);
-        s2.setRotationPoint(0.0F, -12.0F, 2.5F);
-        rightarm.addChild(s2);
-        setRotationAngle(s2, 0.5236F, 0.0F, 0.0F);
-        s2.setTextureOffset(48, 49).addBox(-14.0F, -2.0F, 4.1962F, 5.0F, 2.0F, 1.0F, 0.0F, false);
+        bone7 = new ModelRenderer(this);
+        bone7.setRotationPoint(0.0F, 0.0F, 13.0F);
+        katana.addChild(bone7);
+        setRotationAngle(bone7, 0.1745F, 0.0F, 0.0F);
+        bone7.setTextureOffset(46, 16).addBox(-0.1555F, -2.2105F, -1.1147F, 1.0F, 2.0F, 8.0F, 0.0F, false);
 
-        s3 = new ModelRenderer(this);
-        s3.setRotationPoint(-10.0F, 3.0F, 0.0F);
-        rightarm.addChild(s3);
-        setRotationAngle(s3, 0.0F, 0.0F, 0.5236F);
-        s3.setTextureOffset(19, 11).addBox(-12.0F, -20.0F, 2.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
-        s3.setTextureOffset(0, 18).addBox(-12.433F, -18.75F, 3.0F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-        s3.setTextureOffset(0, 12).addBox(-12.433F, -18.75F, 1.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-
-        hand = new ModelRenderer(this);
-        hand.setRotationPoint(2.25F, -3.0F, 0.0F);
-        rightarm.addChild(hand);
-        setRotationAngle(hand, 0.0F, 0.0F, -0.1745F);
-        hand.setTextureOffset(45, 18).addBox(-19.0F, -16.25F, 1.0F, 4.0F, 1.0F, 4.0F, 0.0F, false);
-        hand.setTextureOffset(12, 48).addBox(-18.0F, -15.5F, 1.5F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-        hand.setTextureOffset(51, 8).addBox(-17.8316F, -14.7849F, 1.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
-        hand.setTextureOffset(26, 26).addBox(-17.5702F, -14.9151F, -21.0F, 2.0F, 1.0F, 22.0F, 0.0F, false);
-
-        leftarm = new ModelRenderer(this);
-        leftarm.setRotationPoint(-4.0F, 8.0F, 3.0F);
-        setRotationAngle(leftarm, 3.1416F, -0.0873F, -2.1817F);
-
-
-        right2 = new ModelRenderer(this);
-        right2.setRotationPoint(10.0F, 0.0F, 0.0F);
-        leftarm.addChild(right2);
-        right2.setTextureOffset(29, 0).addBox(-16.0F, -17.0F, 0.0F, 8.0F, 2.0F, 6.0F, 0.0F, false);
-        right2.setTextureOffset(0, 6).addBox(-15.0F, -17.3F, 1.0F, 6.0F, 2.0F, 4.0F, 0.0F, false);
-        right2.setTextureOffset(0, 0).addBox(-15.0F, -16.3F, 1.0F, 6.0F, 2.0F, 4.0F, 0.0F, false);
-        right2.setTextureOffset(45, 16).addBox(-9.0F, -17.5F, 4.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        right2.setTextureOffset(12, 20).addBox(-9.0F, -17.5F, 1.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        right2.setTextureOffset(16, 0).addBox(-6.0F, -17.5F, 2.0F, 1.0F, 1.0F, 2.0F, 0.0F, false);
-
-        s4 = new ModelRenderer(this);
-        s4.setRotationPoint(10.0F, -17.0F, 1.0F);
-        leftarm.addChild(s4);
-        setRotationAngle(s4, -0.5236F, 0.0F, 0.0F);
-        s4.setTextureOffset(36, 49).addBox(-14.0F, 0.875F, -0.7835F, 5.0F, 2.0F, 1.0F, 0.0F, false);
-
-        s5 = new ModelRenderer(this);
-        s5.setRotationPoint(10.0F, -12.0F, 2.5F);
-        leftarm.addChild(s5);
-        setRotationAngle(s5, 0.5236F, 0.0F, 0.0F);
-        s5.setTextureOffset(24, 49).addBox(-14.0F, -2.0F, 4.1962F, 5.0F, 2.0F, 1.0F, 0.0F, false);
-
-        s6 = new ModelRenderer(this);
-        s6.setRotationPoint(0.0F, 3.0F, 0.0F);
-        leftarm.addChild(s6);
-        setRotationAngle(s6, 0.0F, 0.0F, 0.5236F);
-        s6.setTextureOffset(19, 5).addBox(-12.0F, -20.0F, 2.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
-        s6.setTextureOffset(0, 6).addBox(-12.433F, -18.75F, 3.0F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-        s6.setTextureOffset(0, 0).addBox(-12.433F, -18.75F, 1.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
-
-        hand2 = new ModelRenderer(this);
-        hand2.setRotationPoint(12.25F, -3.0F, 0.0F);
-        leftarm.addChild(hand2);
-        setRotationAngle(hand2, 0.0F, 0.0F, -0.1745F);
-        hand2.setTextureOffset(0, 18).addBox(-19.0F, -16.25F, 1.0F, 4.0F, 1.0F, 4.0F, 0.0F, false);
-        hand2.setTextureOffset(0, 48).addBox(-18.0F, -15.5F, 1.5F, 3.0F, 2.0F, 3.0F, 0.0F, false);
-
-        sword = new ModelRenderer(this);
-        sword.setRotationPoint(4.3172F, -1.0607F, 3.3892F);
-        leftarm.addChild(sword);
-        setRotationAngle(sword, 0.0F, 0.4363F, -0.5236F);
-        sword.setTextureOffset(12, 18).addBox(-6.5816F, -17.7849F, 1.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        sword.setTextureOffset(0, 0).addBox(-6.2344F, -17.9F, -21.9962F, 3.0F, 1.0F, 23.0F, 0.0F, false);
+        back = new ModelRenderer(this);
+        back.setRotationPoint(0.0F, 24.0F, 0.0F);
+        back.setTextureOffset(0, 28).addBox(-16.0F, -34.0F, 10.0F, 32.0F, 21.0F, 0.0F, 0.0F, false);
     }
 
     public void renderLeftArm(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        this.leftarm.render(matrixStack, buffer, packedLight, packedOverlay);
+        this.rightArm.render(matrixStack, buffer, 0xF000F0, packedOverlay);
     }
 
     public void renderRightArm(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        this.rightarm.render(matrixStack, buffer, packedLight, packedOverlay);
+        this.leftArm.render(matrixStack, buffer, 0xF000F0, packedOverlay);
     }
 
     public void renderStigma(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-        bone3.render(matrixStack, buffer, packedLight, packedOverlay);
+        this.back.render(matrixStack, buffer, 0xF000F0, packedOverlay);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.meteor.honkaiimpact.client;
 
 import com.meteor.honkaiimpact.HonkaiImpact;
-import com.meteor.honkaiimpact.LayerHerrscher;
 import com.meteor.honkaiimpact.client.renderer.RenderKeyOfTruth;
 import com.meteor.honkaiimpact.client.renderer.RenderMotor;
+import com.meteor.honkaiimpact.client.renderer.RenderSlash;
 import com.meteor.honkaiimpact.common.core.IProxy;
 import com.meteor.honkaiimpact.common.entities.ModEntities;
 import net.minecraft.client.GameSettings;
@@ -27,6 +27,7 @@ public class ClientProxy implements IProxy {
     public static void onClientSetUpEvent(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MOTOR, RenderMotor::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.KEY_OF_TRUTH, RenderKeyOfTruth::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SLASH, RenderSlash::new);
         Minecraft mc = Minecraft.getInstance();
         GameSettings gameSettings = mc.gameSettings;
         HonkaiImpact.keyForward = gameSettings.keyBindForward;
@@ -35,7 +36,6 @@ public class ClientProxy implements IProxy {
         HonkaiImpact.keyRight = gameSettings.keyBindRight;
         HonkaiImpact.keyUp = gameSettings.keyBindJump;
         HonkaiImpact.keyFlight = gameSettings.keyBindSprint;
-
     }
 
     @Override
@@ -47,6 +47,7 @@ public class ClientProxy implements IProxy {
     private void loadComplete(FMLLoadCompleteEvent event) {
         DeferredWorkQueue.runLater(() -> {
             initAuxiliaryRender();
+            initStigmataRender();
         });
     }
 
@@ -60,6 +61,18 @@ public class ClientProxy implements IProxy {
         render = skinMap.get("slim");
 
         render.addLayer(new LayerHerrscher(render));
+    }
+
+    private void initStigmataRender() {
+        Map<String, PlayerRenderer> skinMap = Minecraft.getInstance().getRenderManager().getSkinMap();
+        PlayerRenderer render;
+        render = skinMap.get("default");
+
+        render.addLayer(new LayerStigmata(render));
+
+        render = skinMap.get("slim");
+
+        render.addLayer(new LayerStigmata(render));
     }
 
 }
