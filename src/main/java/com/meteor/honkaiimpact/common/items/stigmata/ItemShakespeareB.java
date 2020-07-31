@@ -13,21 +13,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class ItemBenaresB extends ItemBenares {
+public class ItemShakespeareB extends ItemShakespeare{
 
-    public ItemBenaresB() {
+    public ItemShakespeareB() {
         super();
     }
 
     @OnlyIn(Dist.CLIENT)
     public void addHiddenTooltip(ItemStack stack, World world, List<ITextComponent> stacks, ITooltipFlag flags) {
-        stacks.add(new TranslationTextComponent("honkaiimpactmisc.benaresb").applyTextStyle(TextFormatting.AQUA));
-        stacks.add(new TranslationTextComponent("honkaiimpactmisc.benaresbdesc0"));
+        stacks.add(new TranslationTextComponent("honkaiimpactmisc.shakespeareb").applyTextStyle(TextFormatting.AQUA));
+        stacks.add(new TranslationTextComponent("honkaiimpactmisc.shakespearebdesc0"));
     }
 
     @Override
     public DamageCalculator getDamageBoost(PlayerEntity player){
-        return new DamageCalculator(0F,0F,0.25F,0F, 0F);
+        return new DamageCalculator(0F,0F,0F,0.51F, 0F);
     }
 
 }

@@ -27,7 +27,7 @@ public class ItemBenaresM extends ItemBenares {
 
     @Override
     public DamageCalculator getDamageBoost(PlayerEntity player){
-        return new DamageCalculator(0F,0F,0.25F,0F);
+        return new DamageCalculator(0F,0F,0.25F,0F, 0F);
     }
 
 }

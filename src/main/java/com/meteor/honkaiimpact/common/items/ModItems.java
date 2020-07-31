@@ -44,4 +44,24 @@ public class ModItems {
         return new ItemWeltYangB();
     });
 
+    public static RegistryObject<Item> shakespearet = ITEMS.register(LibItemNames.SHAKESPEARET, () -> {
+        return new ItemShakespeareT();
+    });
+
+    public static RegistryObject<Item> shakespearem = ITEMS.register(LibItemNames.SHAKESPEAREM, () -> {
+        return new ItemShakespeareM();
+    });
+
+    public static RegistryObject<Item> shakespeareb = ITEMS.register(LibItemNames.SHAKESPEAREB, () -> {
+        return new ItemShakespeareB();
+    });
+
+    public static RegistryObject<Item> standardsupplycard = ITEMS.register(LibItemNames.STANDARDSUPPLYCARD, () -> {
+        return new ItemStandardSupplyCard();
+    });
+
+    public static RegistryObject<Item> focusedsupplycard = ITEMS.register(LibItemNames.FOCUSEDSUPPLYCARD, () -> {
+        return new ItemFocusedSupplyCard();
+    });
+
 }

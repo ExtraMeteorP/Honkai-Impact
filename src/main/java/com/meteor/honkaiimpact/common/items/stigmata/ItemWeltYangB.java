@@ -27,7 +27,7 @@ public class ItemWeltYangB extends ItemWeltYang{
 
     @Override
     public DamageCalculator getDamageBoost(PlayerEntity player){
-        return new DamageCalculator(0.15F,0F,0F,0F);
+        return new DamageCalculator(0.15F,0F,0F,0F, 0F);
     }
 
 }

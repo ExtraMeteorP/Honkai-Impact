@@ -15,7 +15,7 @@ public class PotionNanoBoost extends Effect implements IDamageBooster {
 
     @Override
     public DamageCalculator getDamageBoost(PlayerEntity player) {
-        return new DamageCalculator(0.6F, 0F, 0F, 0F);
+        return new DamageCalculator(0.6F, 0F, 0F, 0F, 0F);
     }
 
     @Override

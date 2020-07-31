@@ -1,0 +1,21 @@
+{
+    "pools": [
+        
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "honkaiimpact:gemofconquest",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:motor",
+                    "weight": 1
+                }
+            ]
+        }
+		
+    ]
+}

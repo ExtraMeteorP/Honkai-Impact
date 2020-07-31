@@ -2,6 +2,7 @@ package com.meteor.honkaiimpact.common.entities;
 
 import com.meteor.honkaiimpact.common.core.ModSounds;
 import com.meteor.honkaiimpact.common.handler.HerrscherHandler;
+import com.meteor.honkaiimpact.common.items.ModItems;
 import com.meteor.honkaiimpact.common.items.stigmata.ItemStigmata;
 import com.meteor.honkaiimpact.common.potion.ModPotions;
 import net.minecraft.entity.Entity;
@@ -28,7 +29,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityMotor extends BoatEntity {
@@ -116,7 +116,7 @@ public class EntityMotor extends BoatEntity {
 
 
     public Item getItemBoat() {
-        return Items.OAK_BOAT;
+        return ModItems.motor.get();
     }
 
     @Override

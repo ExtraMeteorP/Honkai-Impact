@@ -1,0 +1,54 @@
+{
+    "pools": [
+        {
+            "rolls": 3,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "honkaiimpact:benarest",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:benaresm",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:benaresb",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:weltyangt",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:weltyangm",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:shakespearet",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:shakespearem",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:shakespeareb",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:weltyangb",
+                    "weight": 1
+                }
+            ]
+        }
+    ]
+}

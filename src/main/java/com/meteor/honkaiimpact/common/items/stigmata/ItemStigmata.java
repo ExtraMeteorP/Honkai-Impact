@@ -80,7 +80,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
     }
 
     public enum EnumStigmataType{
-        DEFAULT, BENARES, WELTYANG, HANNAH;
+        DEFAULT, BENARES, WELTYANG, HANNAH, SHAKESPEARE;
     }
 
     public EnumStigmataType getStigmataType(){
@@ -127,7 +127,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
 
     @Override
     public DamageCalculator getDamageBoost(PlayerEntity player){
-        return new DamageCalculator(0F,0F,0F,0F);
+        return new DamageCalculator(0F,0F,0F,0F, 0F);
     }
 
     @SubscribeEvent
@@ -149,6 +149,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
         AtomicReference<Float> physicalDMG = new AtomicReference<>(0F);
         AtomicReference<Float> thunderDMG = new AtomicReference<>(0F);
         AtomicReference<Float> iceDMG = new AtomicReference<>(0F);
+        AtomicReference<Float> fireDMG = new AtomicReference<>(0F);
         CuriosAPI.getCuriosHandler(player).ifPresent((handler) -> {
             CurioStackHandler stackHandlerT = handler.getStackHandler("stigmatat");
             CurioStackHandler stackHandlerM = handler.getStackHandler("stigmatam");
@@ -160,6 +161,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
                     physicalDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getPhysicalDMG())));
                     thunderDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getThunderDMG())));
                     iceDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getIceDMG())));
+                    fireDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getFireDMG())));
                 }
             }
 
@@ -170,6 +172,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
                     physicalDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getPhysicalDMG())));
                     thunderDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getThunderDMG())));
                     iceDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getIceDMG())));
+                    fireDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getFireDMG())));
                 }
             }
 
@@ -180,6 +183,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
                     physicalDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getPhysicalDMG())));
                     thunderDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getThunderDMG())));
                     iceDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getIceDMG())));
+                    fireDMG.updateAndGet(v -> new Float((float) (v + stigmata.getDamageBoost(player).getFireDMG())));
                 }
             }
         });
@@ -192,10 +196,11 @@ public class ItemStigmata extends Item implements IDamageBooster{
                     physicalDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getPhysicalDMG())));
                     thunderDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getThunderDMG())));
                     iceDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getIceDMG())));
+                    fireDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getFireDMG())));
                 }
             }
 
-        return new DamageCalculator(allDMG.get(), physicalDMG.get(), thunderDMG.get(), iceDMG.get());
+        return new DamageCalculator(allDMG.get(), physicalDMG.get(), thunderDMG.get(), iceDMG.get(), fireDMG.get());
     }
 
 }

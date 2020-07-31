@@ -42,7 +42,7 @@ public class MotorGUI extends AbstractGui {
         Minecraft mc = Minecraft.getInstance();
         int width = 64;
         int x = mc.getMainWindow().getScaledWidth() / 2 - width / 2;
-        int y = mc.getMainWindow().getScaledHeight() - 54;
+        int y = mc.getMainWindow().getScaledHeight() - 56;
 
         width *= (double) energy / 800D;
         mc.textureManager.bindTexture(HUD);
