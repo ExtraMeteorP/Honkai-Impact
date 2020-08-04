@@ -64,4 +64,8 @@ public class ModItems {
         return new ItemFocusedSupplyCard();
     });
 
+    public static RegistryObject<Item> domainofsanction = ITEMS.register(LibItemNames.DOMAINOFSANCTION, () -> {
+        return new ItemDomainOfSanction();
+    });
+
 }

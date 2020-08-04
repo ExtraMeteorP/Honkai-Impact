@@ -4,6 +4,7 @@ public class LibItemNames {
 
     public static final String MOTOR = "motor";
     public static final String GEMOFCONQUEST = "gemofconquest";
+    public static final String DOMAINOFSANCTION = "domainofsanction";
     public static final String STANDARDSUPPLYCARD = "standardsupplycard";
     public static final String FOCUSEDSUPPLYCARD = "focusedsupplycard";
     public static final String BENAREST = "benarest";

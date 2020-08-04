@@ -200,6 +200,17 @@ public class ItemStigmata extends Item implements IDamageBooster{
                 }
             }
 
+        if(!player.getHeldItemMainhand().isEmpty()){
+            if(player.getHeldItemMainhand().getItem() instanceof IDamageBooster){
+                IDamageBooster booster = (IDamageBooster) player.getHeldItemMainhand().getItem();
+                allDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getAllDMG())));
+                physicalDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getPhysicalDMG())));
+                thunderDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getThunderDMG())));
+                iceDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getIceDMG())));
+                fireDMG.updateAndGet(v -> new Float((float) (v + booster.getDamageBoost(player).getFireDMG())));
+            }
+        }
+
         return new DamageCalculator(allDMG.get(), physicalDMG.get(), thunderDMG.get(), iceDMG.get(), fireDMG.get());
     }
 

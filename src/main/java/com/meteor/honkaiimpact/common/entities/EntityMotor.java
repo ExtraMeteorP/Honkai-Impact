@@ -5,6 +5,8 @@ import com.meteor.honkaiimpact.common.handler.HerrscherHandler;
 import com.meteor.honkaiimpact.common.items.ModItems;
 import com.meteor.honkaiimpact.common.items.stigmata.ItemStigmata;
 import com.meteor.honkaiimpact.common.potion.ModPotions;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,17 +20,18 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import java.awt.*;
 import java.util.List;
 
 public class EntityMotor extends BoatEntity {
@@ -132,6 +135,17 @@ public class EntityMotor extends BoatEntity {
                     setRotation(-5);
             }
 
+            float speed = 1.75F;
+            double mx = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
+                    * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * speed);
+            double mz = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
+                    * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * speed);
+            double my = this.getMotion().y;
+
+            if(this.forwardInputDown){
+                this.world.addParticle(ParticleTypes.FLAME, this.getPosX(), this.getPosY(), this.getPosZ(), -mx, 0.15F, -mz);
+            }
+
             if (this.rightInputDown) {
                 setRotation(-5);
             } else if (this.leftInputDown) {
@@ -155,15 +169,14 @@ public class EntityMotor extends BoatEntity {
                 /**
                  * 消耗构造能量快速飞进
                  */
-                if (this.spaceInputDown && this.getTectonicEnergy() >= 200){
-                    this.setTectonicEnergy(Math.max(0, this.getTectonicEnergy() - 7));
-                    float speed = 1.75F;
-                    double mx = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
-                            * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * speed);
-                    double mz = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
-                            * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * speed);
-                    double my = this.getMotion().y;
-                    this.setMotion(mx,my,mz);
+                if (this.spaceInputDown){
+                    if(this.getTectonicEnergy() >= 200) {
+                        this.setTectonicEnergy(Math.max(0, this.getTectonicEnergy() - 6));
+                        this.setMotion(mx, my, mz);
+                        if (this.world.getBlockState(this.getPosition().add(new Vec3i(mx,my,mz))).getBlock() != Blocks.AIR)
+                            this.setPosition(this.getPosX(), this.getPosY() + 1F, this.getPosZ());
+                    }else
+                        this.setTectonicEnergy(0);
                 }
 
                 /**
@@ -327,6 +340,11 @@ public class EntityMotor extends BoatEntity {
                 this.setMotion(vec3d1.x, (vec3d1.y + d2 * 0.06153846016296973D) * 0.75D, vec3d1.z);
             }
         }
+    }
+
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+        this.fallDistance = 0.0F;
     }
 
     @Override
