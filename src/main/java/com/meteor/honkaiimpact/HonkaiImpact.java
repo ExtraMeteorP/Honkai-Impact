@@ -7,6 +7,7 @@ import com.meteor.honkaiimpact.common.core.CurioIntegration;
 import com.meteor.honkaiimpact.common.core.IProxy;
 import com.meteor.honkaiimpact.common.core.ModSounds;
 import com.meteor.honkaiimpact.common.entities.ModEntities;
+import com.meteor.honkaiimpact.common.handler.LootHandler;
 import com.meteor.honkaiimpact.common.items.ModItems;
 import com.meteor.honkaiimpact.common.libs.LibMisc;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -51,6 +53,9 @@ public class HonkaiImpact {
         modBus.addGenericListener(EntityType.class, ModEntities::registerEntities);
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         modBus.addGenericListener(SoundEvent.class, ModSounds::registerSounds);
+
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        forgeBus.addListener(LootHandler::lootLoad);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

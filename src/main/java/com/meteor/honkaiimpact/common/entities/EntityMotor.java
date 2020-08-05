@@ -265,6 +265,35 @@ public class EntityMotor extends BoatEntity {
             ridingTicks = 0;
     }
 
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (this.isInvulnerableTo(source)) {
+            return false;
+        } else if (!this.world.isRemote && !this.removed) {
+            if (source instanceof IndirectEntityDamageSource && source.getTrueSource() != null && this.isPassenger(source.getTrueSource())) {
+                return false;
+            } else {
+                this.setForwardDirection(-this.getForwardDirection());
+                this.setTimeSinceHit(10);
+                this.markVelocityChanged();
+                boolean flag = source.getTrueSource() instanceof PlayerEntity && ((PlayerEntity)source.getTrueSource()).abilities.isCreativeMode;
+                if(source.getTrueSource() instanceof PlayerEntity)
+                    this.setDamageTaken(this.getDamageTaken() + amount * 10.0F);
+                if (flag || this.getDamageTaken() > 40.0F) {
+                    if (!flag && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+                        this.entityDropItem(this.getItemBoat());
+                    }
+
+                    this.remove();
+                }
+
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
+
     public List<LivingEntity> getEntitiesAround() {
         return getEntitiesAround(this.getPosition(), 12F, this.world);
     }
