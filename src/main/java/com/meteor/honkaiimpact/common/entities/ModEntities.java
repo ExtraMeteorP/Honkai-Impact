@@ -43,12 +43,20 @@ public class ModEntities {
             .setShouldReceiveVelocityUpdates(true)
             .build("");
 
+    public static final EntityType<EntitySupplyChest> SUPPLYCHEST = EntityType.Builder.<EntitySupplyChest>create(
+            EntitySupplyChest::new, EntityClassification.MISC)
+            .size(0.1F, 0.1F)
+            .setUpdateInterval(10)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .build("");
+
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> evt) {
         IForgeRegistry<EntityType<?>> r = evt.getRegistry();
         register(r, LibEntityNames.KEYOFTRUTH, KEY_OF_TRUTH);
         register(r, LibEntityNames.MOTOR, MOTOR);
         register(r, LibEntityNames.SLASH, SLASH);
-        register(r, LibEntityNames.KULIKAH, KULIKAH);
+        register(r, LibEntityNames.SUPPLYCHEST, SUPPLYCHEST);
     }
 
     public static <V extends IForgeRegistryEntry<V>> void register(IForgeRegistry<V> reg, ResourceLocation name, IForgeRegistryEntry<V> thing) {

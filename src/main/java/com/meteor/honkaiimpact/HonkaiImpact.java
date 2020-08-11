@@ -3,6 +3,7 @@ package com.meteor.honkaiimpact;
 import com.meteor.honkaiimpact.client.ClientProxy;
 import com.meteor.honkaiimpact.common.HonkaiImpactGroup;
 import com.meteor.honkaiimpact.common.ServerProxy;
+import com.meteor.honkaiimpact.common.capability.CapabilityHandler;
 import com.meteor.honkaiimpact.common.core.CurioIntegration;
 import com.meteor.honkaiimpact.common.core.IProxy;
 import com.meteor.honkaiimpact.common.core.ModSounds;
@@ -60,6 +61,7 @@ public class HonkaiImpact {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         CurioIntegration.init();
+        CapabilityHandler.register();
     }
 
 }

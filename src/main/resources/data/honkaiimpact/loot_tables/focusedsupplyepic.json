@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-            "rolls": 3,
+            "rolls": 2,
             "entries": [
                 {
                     "type": "item",
@@ -41,6 +41,11 @@
 				{
                     "type": "item",
                     "name": "honkaiimpact:shakespeareb",
+                    "weight": 1
+                },
+				{
+                    "type": "item",
+                    "name": "honkaiimpact:domainofsanction",
                     "weight": 1
                 },
 				{

@@ -6,5 +6,6 @@ public class LibEntityNames {
     public static final String SLASH = "slash";
     public static final String MOTOR = "motor";
     public static final String KULIKAH = "kulikah";
+    public static final String SUPPLYCHEST = "supplychest";
 
 }

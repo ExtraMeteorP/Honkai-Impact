@@ -1,14 +1,20 @@
 package com.meteor.honkaiimpact.client;
 
 import com.meteor.honkaiimpact.HonkaiImpact;
+import com.meteor.honkaiimpact.client.handler.HUDHandler;
 import com.meteor.honkaiimpact.client.renderer.RenderKeyOfTruth;
 import com.meteor.honkaiimpact.client.renderer.RenderMotor;
 import com.meteor.honkaiimpact.client.renderer.RenderSlash;
+import com.meteor.honkaiimpact.client.renderer.RenderSupplyChest;
 import com.meteor.honkaiimpact.common.core.IProxy;
 import com.meteor.honkaiimpact.common.entities.ModEntities;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -20,14 +26,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Map;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientProxy implements IProxy {
 
-    @SubscribeEvent
-    public static void onClientSetUpEvent(FMLClientSetupEvent event) {
+    public void registerModels(ModelRegistryEvent evt) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MOTOR, RenderMotor::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.KEY_OF_TRUTH, RenderKeyOfTruth::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SLASH, RenderSlash::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SUPPLYCHEST, RenderSupplyChest::new);
+    }
+
+    public void onClientSetUpEvent(FMLClientSetupEvent event) {
         Minecraft mc = Minecraft.getInstance();
         GameSettings gameSettings = mc.gameSettings;
         HonkaiImpact.keyForward = gameSettings.keyBindForward;
@@ -41,7 +49,12 @@ public class ClientProxy implements IProxy {
     @Override
     public void registerHandlers() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modBus.addListener(this::onClientSetUpEvent);
         modBus.addListener(this::loadComplete);
+        modBus.addListener(this::registerModels);
+
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        forgeBus.addListener(HUDHandler::onOverlayRender);
     }
 
     private void loadComplete(FMLLoadCompleteEvent event) {
