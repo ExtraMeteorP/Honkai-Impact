@@ -31,7 +31,6 @@ public class EntityKeyOfTruth extends Entity {
     private static final String TAG_TYPE = "type";
 
     private static PlayerEntity owner;
-    public boolean shoot = false;
     private int countdown = 5;
     private static final DataParameter<Float> ROTATION = EntityDataManager.createKey(EntityKeyOfTruth.class,
             DataSerializers.FLOAT);
@@ -43,6 +42,8 @@ public class EntityKeyOfTruth extends Entity {
             DataSerializers.VARINT);
     private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityKeyOfTruth.class,
             DataSerializers.VARINT);
+    private static final DataParameter<Boolean> SHOOT = EntityDataManager.createKey(EntityKeyOfTruth.class,
+            DataSerializers.BOOLEAN);
 
     public EntityKeyOfTruth(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -60,6 +61,7 @@ public class EntityKeyOfTruth extends Entity {
         dataManager.register(PITCH, 0F);
         dataManager.register(TARGET, -1);
         dataManager.register(TYPE, 0);
+        dataManager.register(SHOOT,false);
     }
 
     @Override
@@ -71,54 +73,52 @@ public class EntityKeyOfTruth extends Entity {
     public void tick() {
         super.tick();
 
-        if (owner == null) {
-            this.remove();
-            return;
-        }
+        if (owner != null) {
 
-        if (getTarget() == -1){
-            if(owner.getLastAttackedEntity() != null && owner.getLastAttackedEntity().canEntityBeSeen(owner)) {
-                setTarget(owner.getLastAttackedEntity().getEntityId());
-            } else for (LivingEntity living : getEntitiesAround()) {
-                if (living == owner)
-                    continue;
-                if (living instanceof IMob) {
-                    setTarget(living.getEntityId());
-                    break;
-                }
-            }
-        }
-
-        Entity target = world.getEntityByID(getTarget());
-
-        if (target == null)
-            remove();
-        if(target != null) {
-            this.faceEntity(target, 360F, 360F);
-
-            setRotation(MathHelper.wrapDegrees(-this.rotationYaw + 180));
-            setPitch(-this.rotationPitch + 360);
-
-            if (ticksExisted % 10 == 0 && !this.shoot) {
-                world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.shoot, SoundCategory.PLAYERS, 0.25F, 1F, true);
-                this.shoot = true;
-                this.countdown = 4;
-            }
-
-            if (this.countdown > 0) {
-                this.countdown--;
-                if (target != null) {
-                    target.attackEntityFrom(DamageSource.causePlayerDamage(owner), 0.01F);
-                    HerrscherHandler.iceAttack(target, owner, 4F);
+            if (getTarget() == -1) {
+                if (owner.getLastAttackedEntity() != null && owner.getLastAttackedEntity().canEntityBeSeen(owner)) {
+                    setTarget(owner.getLastAttackedEntity().getEntityId());
+                } else for (LivingEntity living : getEntitiesAround()) {
+                    if (living == owner)
+                        continue;
+                    if (living instanceof IMob) {
+                        setTarget(living.getEntityId());
+                        break;
+                    }
                 }
             }
 
-            if (this.countdown == 0)
-                this.shoot = false;
-        }
+            Entity target = world.getEntityByID(getTarget());
 
-        if (ticksExisted >= 45)
-            this.remove();
+            if (target == null)
+                remove();
+            if (target != null) {
+                this.faceEntity(target, 360F, 360F);
+
+                setRotation(MathHelper.wrapDegrees(-this.rotationYaw + 180));
+                setPitch(-this.rotationPitch + 360);
+
+                if (ticksExisted % 10 == 0 && !getShoot()) {
+                    world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.shoot, SoundCategory.PLAYERS, 0.25F, 1F, true);
+                    setShoot(true);
+                    this.countdown = 4;
+                }
+
+                if (this.countdown > 0) {
+                    this.countdown--;
+                    if (target != null) {
+                        target.attackEntityFrom(DamageSource.causePlayerDamage(owner), 0.01F);
+                        HerrscherHandler.iceAttack(target, owner, 4F);
+                    }
+                }
+
+                if (this.countdown == 0)
+                    setShoot(false);
+            }
+
+            if (ticksExisted >= 45)
+                this.remove();
+        }
     }
 
     public List<LivingEntity> getEntitiesAround() {
@@ -167,6 +167,7 @@ public class EntityKeyOfTruth extends Entity {
         setPitch(cmp.getFloat(TAG_PITCH));
         setTarget(cmp.getInt(TAG_TARGET));
         setKeyType(cmp.getInt(TAG_TYPE));
+        setShoot(cmp.getBoolean("shoot"));
     }
 
     @Override
@@ -176,6 +177,15 @@ public class EntityKeyOfTruth extends Entity {
         cmp.putFloat(TAG_PITCH, getPitch());
         cmp.putInt(TAG_TARGET, getTarget());
         cmp.putInt(TAG_TYPE, getKeyType());
+        cmp.putBoolean("shoot", getShoot());
+    }
+
+    public boolean getShoot() {
+        return dataManager.get(SHOOT);
+    }
+
+    public void setShoot(boolean shoot) {
+        dataManager.set(SHOOT,shoot);
     }
 
     public int getKeyType() {

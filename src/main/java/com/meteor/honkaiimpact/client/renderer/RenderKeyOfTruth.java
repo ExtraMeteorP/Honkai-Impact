@@ -51,7 +51,7 @@ public class RenderKeyOfTruth extends EntityRenderer<EntityKeyOfTruth> {
         matrixStackIn.scale(1.0F, -1.0F, -1.0F);
         matrixStackIn.pop();
 
-        if (entityIn.getTarget() != -1 && entityIn.shoot) {
+        if (entityIn.getTarget() != -1 && entityIn.getShoot()) {
             Entity livingentity = entityIn.world.getEntityByID(entityIn.getTarget());
             if(livingentity != null && livingentity.isLiving()) {
                 float f = 0.5F;

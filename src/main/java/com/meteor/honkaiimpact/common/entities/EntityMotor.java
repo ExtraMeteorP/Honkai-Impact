@@ -80,7 +80,7 @@ public class EntityMotor extends BoatEntity {
             PlayerEntity player = (PlayerEntity) this.getPassengers().get(0);
             if(entityIn != player) {
                 HerrscherHandler.iceAttack(entityIn, player, 7F);
-                if (entityIn.isLiving()) {
+                if (entityIn instanceof LivingEntity) {
                     LivingEntity living = (LivingEntity) entityIn;
                     living.knockBack(player, 0.5F, -living.getPosX() + player.getPosX(), -living.getPosZ() + player.getPosZ());
                 }
@@ -304,7 +304,6 @@ public class EntityMotor extends BoatEntity {
                         source.getX() + 0.5 + range, source.getY() + 0.5 + range, source.getZ() + 0.5 + range));
     }
 
-    @OnlyIn(Dist.CLIENT)
     public void updateInput(boolean ctrlInputDown, boolean spaceInputDown) {
         this.ctrlInputDown = ctrlInputDown;
         this.spaceInputDown = spaceInputDown;
