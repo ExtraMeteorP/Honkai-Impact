@@ -30,7 +30,6 @@ public class HerrscherGUI extends AbstractGui {
             int energy = c.getEnergy();
             renderBar(energy);
         });
-
     }
 
     private void renderBar(int energy) {

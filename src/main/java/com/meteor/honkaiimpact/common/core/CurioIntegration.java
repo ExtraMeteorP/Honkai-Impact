@@ -25,11 +25,7 @@ import top.theillusivec4.curios.api.imc.CurioIMCMessage;
 
 import java.util.function.Predicate;
 
-public class CurioIntegration {
-
-    public static void init() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CurioIntegration::sendImc);
-    }
+public class CurioIntegration extends EquipmentHandler{
 
     public static void sendImc(InterModEnqueueEvent evt) {
         InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("stigmatab"));
@@ -37,26 +33,30 @@ public class CurioIntegration {
         InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("stigmatat"));
     }
 
-    public static LazyOptional<IItemHandlerModifiable> getAllWornItems(LivingEntity living) {
+    @Override
+    public LazyOptional<IItemHandlerModifiable> getAllWornItems(LivingEntity living) {
         return CuriosAPI.getCuriosHandler(living).map(h -> {
             IItemHandlerModifiable[] invs = h.getCurioMap().values().toArray(new IItemHandlerModifiable[0]);
             return new CombinedInvWrapper(invs);
         });
     }
 
-    public static ItemStack findItem(Item item, LivingEntity living) {
+    @Override
+    public ItemStack findItem(Item item, LivingEntity living) {
         return CuriosAPI.getCurioEquipped(item, living)
                 .map(ImmutableTriple::getRight)
                 .orElse(ItemStack.EMPTY);
     }
 
-    public static ItemStack findItem(Predicate<ItemStack> pred, LivingEntity living) {
+    @Override
+    public ItemStack findItem(Predicate<ItemStack> pred, LivingEntity living) {
         return CuriosAPI.getCurioEquipped(pred, living)
                 .map(ImmutableTriple::getRight)
                 .orElse(ItemStack.EMPTY);
     }
 
-    public static ICapabilityProvider initCap(ItemStack stack) {
+    @Override
+    public ICapabilityProvider initCap(ItemStack stack) {
         return new SimpleCapProvider<>(CuriosCapability.ITEM, new Wrapper(stack));
     }
 

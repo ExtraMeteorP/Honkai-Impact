@@ -28,7 +28,7 @@ public class LayerHerrscher extends LayerRenderer<AbstractClientPlayerEntity, Pl
 
     @Override
     public void render(@Nonnull MatrixStack ms, @Nonnull IRenderTypeBuffer buffers, int light, AbstractClientPlayerEntity player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if(HerrscherHandler.isHerrscherOfThunder(player)) {
+        if(player != null && HerrscherHandler.isHerrscherOfThunder(player)) {
             IVertexBuilder buffer = buffers.getBuffer(layer.getRenderType(texture)).lightmap(0xF000F0);
             ms.push();
             ms.translate(0, -0.4F, 0);

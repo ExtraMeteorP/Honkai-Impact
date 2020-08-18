@@ -78,8 +78,10 @@ public class EntityMotor extends BoatEntity {
         super.applyEntityCollision(entityIn);
         if (!this.getPassengers().isEmpty() && this.getPassengers().get(0) instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) this.getPassengers().get(0);
-            if(entityIn != player) {
+            Entity passenger = getPassengers().size() > 1 ? getPassengers().get(1) : null;
+            if(entityIn != player && entityIn != passenger) {
                 HerrscherHandler.iceAttack(entityIn, player, 7F);
+                player.setLastAttackedEntity(entityIn);
                 if (entityIn instanceof LivingEntity) {
                     LivingEntity living = (LivingEntity) entityIn;
                     living.knockBack(player, 0.5F, -living.getPosX() + player.getPosX(), -living.getPosZ() + player.getPosZ());
@@ -185,6 +187,8 @@ public class EntityMotor extends BoatEntity {
                 for (LivingEntity living : getEntitiesAround()) {
                     if (living == player)
                         continue;
+                    if(getPassengers().size() > 1 && living == getPassengers().get(1))
+                        continue;
                     if (!living.canEntityBeSeen(player))
                         continue;
                     if ((living instanceof IMob || player.getLastAttackedEntity() == living) && ticksExisted % 15 == 0
@@ -240,18 +244,24 @@ public class EntityMotor extends BoatEntity {
                         }
                 }
 
+                /**
+                 * 半血以下回血
+                 * **/
                 if (player.getHealth() < player.getMaxHealth() * 0.5F)
                     player.heal(0.5F);
 
+                /**
+                 * Ctrl攻击
+                 * **/
                 if (this.getCycloneTicks() == 12 || this.getCycloneTicks() == 6)
                     for (LivingEntity living : getEntitiesAround(player.getPosition(), 4F, player.world)) {
                         if (living == player) {
                             continue;
                         }
-
+                        if(getPassengers().size() > 1 && living == getPassengers().get(1))
+                            continue;
                         HerrscherHandler.iceAttack(living, player,4.5F);
                         player.setLastAttackedEntity(living);
-
                     }
 
                 if (getCycloneTicks() > 0) {

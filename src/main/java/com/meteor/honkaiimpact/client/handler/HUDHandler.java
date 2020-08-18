@@ -29,6 +29,7 @@ public class HUDHandler {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
+
         if (Minecraft.getInstance().player == null ) {
             return;
         }
@@ -40,44 +41,6 @@ public class HUDHandler {
 
         MotorGUI motorGui = new MotorGUI();
         motorGui.render();
-
-
-//        BufferedImage image = null;
-//        try {
-//            URL url = new URL("https://i.loli.net/2020/08/11/174N2YPewRm3t6D.jpg");
-//            image = ImageIO.read(url);
-//        } catch (IOException e) {
-//
-//        }
-//
-//        DynamicTexture dynamicTexture = null;
-//        try {
-//            dynamicTexture = new DynamicTexture(NativeImage.read(getImageStream(image)));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        int width = image.getWidth();
-//        int x = Minecraft.getInstance().getMainWindow().getScaledWidth() / 2 - width / 2;
-//        int y = Minecraft.getInstance().getMainWindow().getScaledHeight() - 56;
-//
-//        Minecraft.getInstance().getTextureManager().loadTexture(new ResourceLocation(LibMisc.MOD_ID, "textures/buffer"), dynamicTexture);
-//        Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(LibMisc.MOD_ID, "textures/buffer"));
-//        AbstractGui.blit(x,y,0,0, image.getWidth(), image.getHeight(),image.getWidth(), image.getHeight() );
-    }
-
-    public static InputStream getImageStream(BufferedImage bimage){
-        InputStream is = null;
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-        ImageOutputStream imOut;
-        try {
-            imOut = ImageIO.createImageOutputStream(bs);
-            ImageIO.write(bimage, "png",imOut);
-            is= new ByteArrayInputStream(bs.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return is;
     }
 
 }

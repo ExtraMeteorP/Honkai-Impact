@@ -62,7 +62,7 @@ public class ItemStigmata extends Item implements IDamageBooster{
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
-        return CurioIntegration.initCap(stack);
+        return CurioIntegration.initBaubleCap(stack);
     }
 
     public void onWornTick(ItemStack stack, LivingEntity entity) {}

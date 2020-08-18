@@ -5,6 +5,7 @@ import com.meteor.honkaiimpact.common.HonkaiImpactGroup;
 import com.meteor.honkaiimpact.common.ServerProxy;
 import com.meteor.honkaiimpact.common.capability.CapabilityHandler;
 import com.meteor.honkaiimpact.common.core.CurioIntegration;
+import com.meteor.honkaiimpact.common.core.EquipmentHandler;
 import com.meteor.honkaiimpact.common.core.IProxy;
 import com.meteor.honkaiimpact.common.core.ModSounds;
 import com.meteor.honkaiimpact.common.entities.ModEntities;
@@ -21,6 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -31,6 +33,8 @@ public class HonkaiImpact {
     public static ItemGroup itemGroup = new HonkaiImpactGroup();
 
     public static IProxy proxy;
+
+    public static boolean curiosLoaded = false;
 
     @OnlyIn(Dist.CLIENT)
     public static KeyBinding keyForward;
@@ -60,8 +64,10 @@ public class HonkaiImpact {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        CurioIntegration.init();
+        curiosLoaded = ModList.get().isLoaded("curios");
+
         CapabilityHandler.register();
+        EquipmentHandler.init();
     }
 
 }

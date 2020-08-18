@@ -25,38 +25,39 @@ public class LayerStigmata extends LayerRenderer<AbstractClientPlayerEntity, Pla
     public void render(@Nonnull MatrixStack ms, @Nonnull IRenderTypeBuffer buffers, int light, AbstractClientPlayerEntity player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         ms.push();
         getEntityModel().bipedBody.translateRotate(ms);
+        if(player != null) {
+            CuriosAPI.getCuriosHandler(player).ifPresent((handler) -> {
+                CurioStackHandler stackHandlerT = handler.getStackHandler("stigmatat");
+                CurioStackHandler stackHandlerM = handler.getStackHandler("stigmatam");
+                CurioStackHandler stackHandlerB = handler.getStackHandler("stigmatab");
+                if (stackHandlerT != null && !stackHandlerT.getStackInSlot(0).isEmpty()) {
+                    ms.push();
+                    ms.translate(0F, 0.1F, 0.122F);
+                    ItemStack stigmata = stackHandlerT.getStackInSlot(0);
+                    ms.scale(0.2F, -0.2F, -0.2F);
+                    renderItem(stigmata, ms, buffers, 0xF000F0);
+                    ms.pop();
+                }
 
-        CuriosAPI.getCuriosHandler(player).ifPresent((handler) -> {
-            CurioStackHandler stackHandlerT = handler.getStackHandler("stigmatat");
-            CurioStackHandler stackHandlerM = handler.getStackHandler("stigmatam");
-            CurioStackHandler stackHandlerB = handler.getStackHandler("stigmatab");
-            if(stackHandlerT != null && !stackHandlerT.getStackInSlot(0).isEmpty()){
-                ms.push();
-                ms.translate(0F, 0.1F, 0.122F);
-                ItemStack stigmata = stackHandlerT.getStackInSlot(0);
-                ms.scale(0.2F, -0.2F, -0.2F);
-                renderItem(stigmata, ms, buffers, 0xF000F0);
-                ms.pop();
-            }
+                if (stackHandlerM != null && !stackHandlerM.getStackInSlot(0).isEmpty()) {
+                    ms.push();
+                    ms.translate(0F, 0.31F, 0.122F);
+                    ItemStack stigmata = stackHandlerM.getStackInSlot(0);
+                    ms.scale(0.2F, -0.2F, -0.2F);
+                    renderItem(stigmata, ms, buffers, 0xF000F0);
+                    ms.pop();
+                }
 
-            if(stackHandlerM != null && !stackHandlerM.getStackInSlot(0).isEmpty()){
-                ms.push();
-                ms.translate(0F, 0.31F, 0.122F);
-                ItemStack stigmata = stackHandlerM.getStackInSlot(0);
-                ms.scale(0.2F, -0.2F, -0.2F);
-                renderItem(stigmata, ms, buffers, 0xF000F0);
-                ms.pop();
-            }
-
-            if(stackHandlerB != null && !stackHandlerB.getStackInSlot(0).isEmpty()){
-                ms.push();
-                ms.translate(0F, 0.52F, 0.122F);
-                ItemStack stigmata = stackHandlerB.getStackInSlot(0);
-                ms.scale(0.2F, -0.2F, -0.2F);
-                renderItem(stigmata, ms, buffers, 0xF000F0);
-                ms.pop();
-            }
-        });
+                if (stackHandlerB != null && !stackHandlerB.getStackInSlot(0).isEmpty()) {
+                    ms.push();
+                    ms.translate(0F, 0.52F, 0.122F);
+                    ItemStack stigmata = stackHandlerB.getStackInSlot(0);
+                    ms.scale(0.2F, -0.2F, -0.2F);
+                    renderItem(stigmata, ms, buffers, 0xF000F0);
+                    ms.pop();
+                }
+            });
+        }
         ms.pop();
     }
 
