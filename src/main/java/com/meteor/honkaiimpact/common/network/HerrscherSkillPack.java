@@ -9,6 +9,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -31,10 +32,12 @@ public class HerrscherSkillPack {
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            ServerPlayerEntity player = ctx.get().getSender();
-            EntitySlash slash = new EntitySlash(player.world, player);
-            slash.setPosition(this.pos.getX(), this.pos.getY(), this.pos.getZ());
-            player.world.addEntity(slash);
+            if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER) {
+                ServerPlayerEntity player = ctx.get().getSender();
+                EntitySlash slash = new EntitySlash(player.world, player);
+                slash.setPosition(this.pos.getX(), this.pos.getY(), this.pos.getZ());
+                player.world.addEntity(slash);
+            }
         });
         ctx.get().setPacketHandled(true);
     }

@@ -137,7 +137,7 @@ public class EntityMotor extends BoatEntity {
                     setRotation(-5);
             }
 
-            float speed = 1.75F;
+            float speed = 1.65F;
             double mx = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
                     * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI) * speed);
             double mz = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
@@ -212,7 +212,7 @@ public class EntityMotor extends BoatEntity {
                 if(this.getCycloneTicks() == 0 && this.ctrlInputDown && this.getTectonicEnergy() >= 400){
                     this.setCycloneTicks(15);
                     this.setTectonicEnergy(this.getTectonicEnergy() - 400);
-                    world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.cyclone, SoundCategory.PLAYERS, 1F, 1F, false);
+                    world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.cyclone, SoundCategory.PLAYERS, 1.4F, 1F, true);
                     /**
                      * 两件套强化
                      */
@@ -418,10 +418,10 @@ public class EntityMotor extends BoatEntity {
     @Override
     public boolean processInitialInteract(PlayerEntity player, Hand hand) {
         if (!player.isSecondaryUseActive()) {
-            if (!this.world.isRemote && this.outOfControlTicks < 60.0F) {
-                player.startRiding(this);
+            if (this.outOfControlTicks < 60.0F) {
+                if(player.startRiding(this))
+                    world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.rideon, SoundCategory.PLAYERS, 5F, 1F, true);
             }
-            world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.rideon, SoundCategory.PLAYERS, 5F, 1F, false);
             return true;
         }
         return false;

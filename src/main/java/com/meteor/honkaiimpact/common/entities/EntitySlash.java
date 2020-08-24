@@ -54,7 +54,7 @@ public class EntitySlash extends Entity {
         super.tick();
 
         if(this.ticksExisted == 1){
-            world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.slash, SoundCategory.PLAYERS, 1.0F, 1.0F, false);
+            world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.slash, SoundCategory.PLAYERS, 1.4F, 1.0F, true);
         }
 
         for(LivingEntity entity : getEntitiesAround()){

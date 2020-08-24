@@ -57,6 +57,11 @@
 	"item.honkaiimpact.focusedsupplycard": "精准补给卡",
 	"item.honkaiimpact.domainofsanction": "天殛之钥",
 	
+	"death.attack.hoi-ice.player": "%1$s被%2$s用冰霜之力打败了",
+	"death.attack.hoi-thunder.player": "%1$s被%2$s用雷电之力打败了",
+	"death.attack.hoi-ice": "%1$s被冰霜之力吞噬了",
+	"death.attack.hoi-thunder": "%1$s被雷电之力吞噬了",
+	
 	"curios.identifier.stigmatat": "究极的攻击型圣痕",
 	"curios.identifier.stigmatam": "究极的防御型圣痕",
 	"curios.identifier.stigmatab": "究极的综合型圣痕"

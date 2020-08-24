@@ -28,6 +28,7 @@ import java.util.function.Predicate;
 public class CurioIntegration extends EquipmentHandler{
 
     public static void sendImc(InterModEnqueueEvent evt) {
+        InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("charm"));
         InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("stigmatab"));
         InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("stigmatam"));
         InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> new CurioIMCMessage("stigmatat"));

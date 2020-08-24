@@ -152,7 +152,7 @@ public class HerrscherHandler {
     }
 
     public static boolean isHerrscherOfThunder(PlayerEntity player){
-        return player.inventory.hasItemStack(new ItemStack(ModItems.gemofconquest.get()));
+        return !CurioIntegration.findOrEmpty(ModItems.gemofconquest.get(), player).isEmpty();
     }
 
     public static BlockRayTraceResult raytraceFromEntity(Entity e, double distance, boolean fluids) {

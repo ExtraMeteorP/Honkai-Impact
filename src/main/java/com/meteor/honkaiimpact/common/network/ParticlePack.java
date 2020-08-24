@@ -9,6 +9,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Rarity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -43,12 +44,14 @@ public class ParticlePack {
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            ClientPlayerEntity player = Minecraft.getInstance().player;
-            for(int i = 0; i < 5; i++)
-                if(isRare)
-                    player.world.addParticle(ParticleTypes.DRAGON_BREATH, posx, posy+0.35,posz, (0.5F-Math.random()) * 0.25F, 0.13F, (0.5F-Math.random()) * 0.25F);
-                else
-                    player.world.addParticle(ParticleTypes.ENCHANTED_HIT, posx, posy+0.65,posz, (0.5F-Math.random()) * 0.25F, 0.13F, (0.5F-Math.random()) * 0.25F);
+            if(ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
+                ClientPlayerEntity player = Minecraft.getInstance().player;
+                for (int i = 0; i < 5; i++)
+                    if (isRare)
+                        player.world.addParticle(ParticleTypes.DRAGON_BREATH, posx, posy + 0.35, posz, (0.5F - Math.random()) * 0.25F, 0.13F, (0.5F - Math.random()) * 0.25F);
+                    else
+                        player.world.addParticle(ParticleTypes.ENCHANTED_HIT, posx, posy + 0.65, posz, (0.5F - Math.random()) * 0.25F, 0.13F, (0.5F - Math.random()) * 0.25F);
+            }
         });
         ctx.get().setPacketHandled(true);
     }
