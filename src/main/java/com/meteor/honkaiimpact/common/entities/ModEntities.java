@@ -13,7 +13,7 @@ public class ModEntities {
 
     public static final EntityType<EntityMotor> MOTOR = EntityType.Builder.<EntityMotor>create(
             EntityMotor::new, EntityClassification.MISC)
-            .size(1.375F, 1.875F)
+            .size(1.675F, 1.875F)
             .setUpdateInterval(10)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)

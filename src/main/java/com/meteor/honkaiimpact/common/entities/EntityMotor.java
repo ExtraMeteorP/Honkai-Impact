@@ -81,7 +81,8 @@ public class EntityMotor extends BoatEntity {
             Entity passenger = getPassengers().size() > 1 ? getPassengers().get(1) : null;
             if(entityIn != player && entityIn != passenger) {
                 HerrscherHandler.iceAttack(entityIn, player, 7F);
-                player.setLastAttackedEntity(entityIn);
+                if(!(entityIn instanceof PlayerEntity))
+                    player.setLastAttackedEntity(entityIn);
                 if (entityIn instanceof LivingEntity) {
                     LivingEntity living = (LivingEntity) entityIn;
                     living.knockBack(player, 0.5F, -living.getPosX() + player.getPosX(), -living.getPosZ() + player.getPosZ());
@@ -160,7 +161,7 @@ public class EntityMotor extends BoatEntity {
             ridingTicks++;
 
             if (this.forwardInputDown && this.collidedHorizontally) {
-                this.setMotion(this.getMotion().x, this.getMotion().y+0.09f, this.getMotion().z);
+                this.setMotion(this.getMotion().x, this.getMotion().y+0.08f, this.getMotion().z);
             }
 
             if (ridingTicks >= 120) {
@@ -293,7 +294,6 @@ public class EntityMotor extends BoatEntity {
                     if (!flag && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
                         this.entityDropItem(this.getItemBoat());
                     }
-
                     this.remove();
                 }
 
@@ -423,6 +423,9 @@ public class EntityMotor extends BoatEntity {
                     world.playSound(getPosX(), getPosY(), getPosZ(), ModSounds.rideon, SoundCategory.PLAYERS, 5F, 1F, true);
             }
             return true;
+        }else{
+            if(!world.isRemote && !this.removed && this.entityDropItem(this.getItemBoat()) != null)
+                this.remove();
         }
         return false;
     }

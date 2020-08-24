@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 public class ModelMotor extends EntityModel {
 
     private final ModelRenderer all;
-    private final ModelRenderer tirefront3;
+    public ModelRenderer tirefront3;
     private final ModelRenderer bone9;
     private final ModelRenderer bone10;
     private final ModelRenderer bone11;
@@ -54,7 +54,7 @@ public class ModelMotor extends EntityModel {
     private final ModelRenderer bone;
     private final ModelRenderer bone37;
     private final ModelRenderer bone38;
-    private final ModelRenderer tireback;
+    public ModelRenderer tireback;
     private final ModelRenderer bone6;
     private final ModelRenderer bone16;
     private final ModelRenderer bone17;
@@ -459,8 +459,10 @@ public class ModelMotor extends EntityModel {
         //previously the render function, render code was moved to a method below
         if(entity instanceof EntityMotor) {
             EntityMotor motor = (EntityMotor) entity;
-            tirefront3.rotateAngleX = MathHelper.wrapDegrees(40 * motor.ridingTicks);
-            tireback.rotateAngleX = MathHelper.wrapDegrees(40 * motor.ridingTicks);
+            if(motor.getMotion().length() > 0) {
+                tirefront3.rotateAngleX = MathHelper.wrapDegrees(40 * motor.ridingTicks);
+                tireback.rotateAngleX = MathHelper.wrapDegrees(40 * motor.ridingTicks);
+            }
         }
     }
 
